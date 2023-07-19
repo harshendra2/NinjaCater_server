@@ -21,8 +21,8 @@ let sendOtp;
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.Email,
-    pass: process.env.PASSWORD,
+    user: "harsendraraj20@gmail.com",
+    pass: "ukiovyhquvazeomy",
   },
 });
 
@@ -49,7 +49,7 @@ exports.userregister = async (req, res) => {
       const OTP = Math.floor(100000 + Math.random() * 900000);
       sendOtp = OTP;
       const mailOption = {
-        from: process.env.Email,
+        from: "harsendraraj20@gmail.com",
         to: email,
         subject: "Sending Email For Otp signup",
         text: `OTP:- ${OTP}`,
@@ -126,7 +126,7 @@ exports.userOtpSend = async (req, res) => {
             );
             await updateDate.save();
             const mailOption = {
-              from: process.env.Email,
+              from: "harsendraraj20@gmail.com",
               to: email,
               subject: "Sending Email For Otp Validation",
               text: `OTP:- ${OTP}`,
@@ -151,7 +151,7 @@ exports.userOtpSend = async (req, res) => {
             await saveOtpData.save();
 
             const mailOption = {
-              from: process.env.Email,
+              from: "harsendraraj20@gmail.com",
               to: email,
               subject: "Sending Email For Otp Validation",
               text: `OTP:- ${OTP}`,
@@ -275,7 +275,7 @@ exports.sendpasswordlink = async (req, res) => {
     );
     if (setusertoken) {
       const mailOption = {
-        from: process.env.Email,
+        from:"harsendraraj20@gmail.com",
         to: email,
         subject: "Sending Email from Password Reset",
         text: `This Link Valid For 2 MINITES http://localhost:3000/user/forgetpassword/${userfind.id}/${setusertoken.verifytoken}`,
