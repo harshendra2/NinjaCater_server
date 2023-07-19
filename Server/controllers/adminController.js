@@ -9,9 +9,9 @@ const Order = require("../models/OrderSchema");
 const { OrderItem } = require("./userController");
 const nodemailer = require("nodemailer");
 const cloudinary = require("cloudinary").v2;
-const cloude_names = process.env.CLOUD_NAME;
-const api_keys = process.env.API_KEY;
-const api_secrets = process.env.API_SECRET;
+const cloude_names = "dcgrqxvbk";
+const api_keys = "241596312989648";
+const api_secrets = "5ktcJh7n9t-vBuk84YSzBnQg-vs";
 
 cloudinary.config({
   cloud_name: cloude_names,

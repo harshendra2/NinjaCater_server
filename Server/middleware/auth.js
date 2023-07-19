@@ -13,7 +13,7 @@ const jwt = require("jsonwebtoken");
         token = token.slice(7, token.length).trimLeft();
       }
   
-      const verified = jwt.verify(token,process.env.SECRET_KEY);
+      const verified = jwt.verify(token,"abcdefghijklmnop");
       req.user = verified;
       next();
     } catch (err) {
