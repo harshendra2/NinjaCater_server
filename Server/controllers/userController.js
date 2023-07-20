@@ -604,7 +604,7 @@ exports.OrderItem = async (req, res) => {
       Nonvegguest: useDetails.Nonvegguest,
     };
 
-    const orderPlacement = await Order.insertMany(orderData);
+    const orderPlacement = await Order.insertMany({orderData});
     if (orderPlacement) {
       return res
         .status(200)
