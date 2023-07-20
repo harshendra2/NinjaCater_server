@@ -23,8 +23,8 @@ cloudinary.config({
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.Email,
-    pass: process.env.PASSWORD,
+    user:"harsendraraj20@gmail.com",
+    pass: "ukiovyhquvazeomy",
   },
 });
 
@@ -504,7 +504,7 @@ const userdata= await users.findById(data.userId)
       );
 
       const mailOption = {
-        from: process.env.Email,
+        from: "harsendraraj20@gmail.com",
         to:userdata.email,
         subject: "NinjaCatering your Order Confirm",
         text: `Hello ${userdata.fname} !!
