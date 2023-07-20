@@ -278,7 +278,7 @@ exports.sendpasswordlink = async (req, res) => {
         from:"harsendraraj20@gmail.com",
         to: email,
         subject: "Sending Email from Password Reset",
-        text: `This Link Valid For 2 MINITES http://localhost:3000/user/forgetpassword/${userfind.id}/${setusertoken.verifytoken}`,
+        text: `This Link Valid For 2 MINITES https://caterninja.netlify.app/user/forgetpassword/${userfind.id}/${setusertoken.verifytoken}`,
       };
 
       transporter.sendMail(mailOption, (error, info) => {
