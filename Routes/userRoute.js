@@ -13,4 +13,4 @@ router.post("/user/delete", controller.DeleteUsers);
 router.post("/user/get", controller.GetUsers);
 router.put("/user/edit", controller.EditUser);
 
-module.exports = router;
+module.exports = router
