@@ -588,29 +588,43 @@ exports.OrderItem = async (req, res) => {
       }))
     );
 
+    
+    if (organiproduct.length === 0) {
+      return res.status(400).json({ error: "No products in the order" });
+    }
+
+  
+    const timeString = useDetails.times.join(', ');
+
     let orderData = {
       userId: data.userId,
       product: organiproduct,
       orderId: orderId,
       date: useDetails.selectedDate,
-      foodType: organiproduct.foodType,
+      foodType: organiproduct[0].foodType, 
       status: "processing",
       address: useDetails.orderAddress,
-      time: useDetails.times,
-      subtotal: grandtotal/2,
+      time: timeString, 
+      subtotal: grandtotal / 2,
       veguest: useDetails.vegguest,
       latitude: useDetails.latitude,
       longitude: useDetails.longitude,
       Nonvegguest: useDetails.Nonvegguest,
     };
 
-    const orderPlacement = await Order.insertMany(orderData);
+    const orderPlacement = await Order.create([orderData]); 
+
+    console.log(orderPlacement);
+
     if (orderPlacement) {
       return res
         .status(200)
         .json({ success: true, message: "Order placed successfully" });
+    } else {
+      return res.status(500).json({ error: "Failed to place the order" });
     }
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
