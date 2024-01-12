@@ -17,7 +17,7 @@ let passwordd;
 let mobilee;
 let sendOtp;
 
-//email config
+//email confi
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
