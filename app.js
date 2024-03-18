@@ -5,7 +5,7 @@ const cors = require("cors");
 require("./db/connection");
 const router = require("./Routes/userRoute");
 const routes = require("./Routes/adminRoute");
-const PORT = 4000;
+const PORT = 3000;
 
 
 // Middleware
