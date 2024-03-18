@@ -113,63 +113,69 @@ exports.userOtpSend = async (req, res) => {
       const passwordMatch = await bcrypt.compare(password, preuser.password);
       if (passwordMatch) {
         if (!preuser.block) {
-          const OTP = Math.floor(100000 + Math.random() * 900000);
+        //   const OTP = Math.floor(100000 + Math.random() * 900000);
 
-          const existEmail = await userotp.findOne({ email: email });
-          if (existEmail) {
-            const updateDate = await userotp.findByIdAndUpdate(
-              { _id: existEmail._id },
-              {
-                otp: OTP,
-              },
-              { new: true }
-            );
-            await updateDate.save();
-            const mailOption = {
-              from: "harsendraraj20@gmail.com",
-              to: email,
-              subject: "Sending Email For Otp Validation",
-              text: `OTP:- ${OTP}`,
-            };
+        //   const existEmail = await userotp.findOne({ email: email });
+        //   if (existEmail) {
+        //     const updateDate = await userotp.findByIdAndUpdate(
+        //       { _id: existEmail._id },
+        //       {
+        //         otp: OTP,
+        //       },
+        //       { new: true }
+        //     );
+        //     await updateDate.save();
+        //     const mailOption = {
+        //       from: "harsendraraj20@gmail.com",
+        //       to: email,
+        //       subject: "Sending Email For Otp Validation",
+        //       text: `OTP:- ${OTP}`,
+        //     };
 
-            transporter.sendMail(mailOption, (error, info) => {
-              if (error) {
-                console.log("error", error);
-                return res.status(400).json({ error: "Email Not Send" });
-              } else {
-                console.log("Email Send", info.response);
-                return res
-                  .status(200)
-                  .json({ message: "Email send Successfully" });
-              }
-            });
-          } else {
-            const saveOtpData = new userotp({
-              email,
-              otp: OTP,
-            });
-            await saveOtpData.save();
+        //     transporter.sendMail(mailOption, (error, info) => {
+        //       if (error) {
+        //         console.log("error", error);
+        //         return res.status(400).json({ error: "Email Not Send" });
+        //       } else {
+        //         console.log("Email Send", info.response);
+        //         return res
+        //           .status(200)
+        //           .json({ message: "Email send Successfully" });
+        //       }
+        //     });
+        //   } else {
+        //     const saveOtpData = new userotp({
+        //       email,
+        //       otp: OTP,
+        //     });
+        //     await saveOtpData.save();
 
-            const mailOption = {
-              from: "harsendraraj20@gmail.com",
-              to: email,
-              subject: "Sending Email For Otp Validation",
-              text: `OTP:- ${OTP}`,
-            };
+        //     const mailOption = {
+        //       from: "harsendraraj20@gmail.com",
+        //       to: email,
+        //       subject: "Sending Email For Otp Validation",
+        //       text: `OTP:- ${OTP}`,
+        //     };
 
-            transporter.sendMail(mailOption, (error, info) => {
-              if (error) {
-                console.log("error", error);
-                return res.status(400).json({ error: "Email Not Send" });
-              } else {
-                console.log("Email Send", info.response);
-                return res
-                  .status(200)
-                  .json({ message: "Email send Successfully" });
-              }
-            });
-          }
-        }
+        //     transporter.sendMail(mailOption, (error, info) => {
+        //       if (error) {
+        //         console.log("error", error);
+        //         return res.status(400).json({ error: "Email Not Send" });
+        //       } else {
+        //         console.log("Email Send", info.response);
+        //         return res
+        //           .status(200)
+        //           .json({ message: "Email send Successfully" });
+        //       }
+        //     });
+        //   }
+        // }
+
+        const token = await preuser.generateAuthtoken();
+      return res
+        .status(200)
+        .json({ message: "User Login Succesfully Done", userToken: token });
+              
       } else {
         return res.status(400).json({ error: "Please Enter Valid Password" });
       }
@@ -183,6 +189,7 @@ exports.userOtpSend = async (req, res) => {
         error: "Your account is blocked.Please contact customer care",
       });
     }
+  }
   } catch (error) {
     return res.status(400).json({ error: "Invalid Details", error });
   }
